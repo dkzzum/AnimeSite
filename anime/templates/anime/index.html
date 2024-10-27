@@ -1,0 +1,229 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <!-- Hero Section Begin -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero__slider owl-carousel">
+                {% for item in hero %}
+                    <div class="hero__items set-bg" data-setbg="{% static 'anime/img/hero/' %}{{ item.slug }}.jpg">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="hero__text">
+                                    <div class="label">{{ item.category }}</div>
+                                    <h2>{{ item.title }}</h2>
+                                    <p>{{ item.content }}</p>
+                                    <a href="#"><span>Смотреть сейчас</span> <i class="fa fa-angle-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
+
+    <!-- Product Section Begin -->
+    <section class="product spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+
+                    <div class="trending__product">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-8 col-sm-8">
+                                <div class="section-title">
+                                    <h4>Популярные фильмы</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                <div class="btn__all">
+                                    <a href="#" class="primary-btn">Смотреть больше<span class="arrow_right"></span></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            {% for items in trending_now %}
+                                <div class="col-lg-4 col-md-6 col-sm-6">
+                                    <div class="product__item">
+                                        <div class="product__item__pic set-bg" data-setbg="{% static 'anime/img/popular/' %}{{ items.slug }}.jpg">
+                                            <div class="ep"> {{ items.grade }}</div>
+                                            <div class="comment"><i class="fa fa-comments"></i> {{ items.commentaries }}</div>
+                                            <div class="view"><i class="fa fa-eye"></i> {{ items.view }}</div>
+                                        </div>
+                                        <div class="product__item__text">
+                                            <ul>
+                                                {% for cat in items.category.all %}
+                                                    <li>{{ cat.name }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                            <h5><a href="{{ items.get_absolute_url }}">{{ items.title }}</a></h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+
+                    <div class="popular__product">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-8 col-sm-8">
+                                <div class="section-title">
+                                    <h4>Популярные сериалы</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                <div class="btn__all">
+                                    <a href="#" class="primary-btn">Смотреть больше<span class="arrow_right"></span></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            {% for items in trending_now %}
+                                <div class="col-lg-4 col-md-6 col-sm-6">
+                                    <div class="product__item">
+                                        <div class="product__item__pic set-bg" data-setbg="{% static 'anime/img/popular/' %}{{ items.slug }}.jpg">
+                                            <div class="ep">{{ items.grade }}</div>
+                                            <div class="comment"><i class="fa fa-comments"></i>{{ items.commentaries }}</div>
+                                            <div class="view"><i class="fa fa-eye"></i>{{ items.view }}</div>
+                                        </div>
+                                        <div class="product__item__text">
+                                            <ul>
+                                                {% for cat in items.category.all %}
+                                                    <li>{{ cat.name }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                            <h5><a href="#">{{ items.title }}</a></h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="popular__product">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-8 col-sm-8">
+                                <div class="section-title">
+                                    <h4>Популярные новинки</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                <div class="btn__all">
+                                    <a href="#" class="primary-btn">Смотреть больше<span class="arrow_right"></span></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            {% for items in trending_now %}
+                                <div class="col-lg-4 col-md-6 col-sm-6">
+                                    <div class="product__item">
+                                        <div class="product__item__pic set-bg" data-setbg="{% static 'anime/img/popular/' %}{{ items.slug }}.jpg">
+                                            <div class="ep">{{ items.grade }}</div>
+                                            <div class="comment"><i class="fa fa-comments"></i>{{ items.commentaries }}</div>
+                                            <div class="view"><i class="fa fa-eye"></i>{{ items.view }}</div>
+                                        </div>
+                                        <div class="product__item__text">
+                                            <ul>
+                                                {% for cat in items.category.all %}
+                                                    <li>{{ cat.name }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                            <h5><a href="#">{{ items.title }}</a></h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+{#                    <div class="popular__product">#}
+{#                        <div class="row">#}
+{#                            <div class="col-lg-8 col-md-8 col-sm-8">#}
+{#                                <div class="section-title">#}
+{#                                    <h4>Популярные сериалы</h4>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="col-lg-4 col-md-4 col-sm-4">#}
+{#                                <div class="btn__all">#}
+{#                                    <a href="#" class="primary-btn">Смотреть больше<span class="arrow_right"></span></a>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{##}
+{#                        <div class="row">#}
+{#                            {% for items in trending_now %}#}
+{#                                <div class="col-lg-4 col-md-6 col-sm-6">#}
+{#                                    <div class="product__item">#}
+{#                                        <div class="product__item__pic set-bg" data-setbg="{% static 'anime/img/popular/' %}{{ items.slug }}.jpg">#}
+{#                                            <div class="ep">{{ items.grade }}</div>#}
+{#                                            <div class="comment"><i class="fa fa-comments"></i>{{ items.commentaries }}</div>#}
+{#                                            <div class="view"><i class="fa fa-eye"></i>{{ items.views }}</div>#}
+{#                                        </div>#}
+{#                                        <div class="product__item__text">#}
+{#                                            <ul>#}
+{#                                                {% for cat in items.category.all %}#}
+{#                                                    <li>{{ cat.name }}</li>#}
+{#                                                {% endfor %}#}
+{#                                            </ul>#}
+{#                                            <h5><a href="#">{{ items.title }}</a></h5>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            {% endfor %}#}
+{#                        </div>#}
+{#                    </div>#}
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-8">
+                    <div class="product__sidebar">
+                        <div class="product__sidebar__view">
+                            <div class="section-title">
+                                <h5>Смотрят сейчас</h5>
+                            </div>
+                            <div class="filter__gallery">
+                                {% for item in last_view %}
+                                    <div class="product__sidebar__view__item set-bg"
+                                        data-setbg="{% static 'anime/img/sidebar/' %}{{ item.slug }}.jpg">
+                                        <div class="ep">{{ item.grade }}</div>
+                                        <div class="view"><i class="fa fa-eye"></i>{{ item.view }}</div>
+                                        <h5><a href="#">{{ item.title }}</a></h5>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="product__sidebar__comment">
+                            <div class="section-title">
+                                <h5>Последние комментарии</h5>
+                            </div>
+                            {% for item in last_commentaries %}
+                                <div class="product__sidebar__comment__item">
+                                    <div class="product__sidebar__comment__item__pic">
+                                        <img src="{% static 'anime/img/sidebar/' %}{{ item.slug }}.jpg" alt="">
+                                    </div>
+                                    <div class="product__sidebar__comment__item__text">
+                                        <ul>
+                                            {% for cat in item.category.all %}
+                                                <li>{{ cat }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                        <h5><a href="#">{{ item.title }}</a></h5>
+                                        <span><i class="fa fa-eye"></i>{{ item.view }} Views</span>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Section End -->
+
+{% endblock %}
+
