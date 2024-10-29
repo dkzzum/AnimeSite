@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{{ anime.view.add_view }}
+{{ anime.grade.calculation_grade }}
+
 {% block content %}
 
-    {{ anime.view.add_view }}
     <!-- Breadcrumb Begin -->
     <div class="breadcrumb-option">
         <div class="container">

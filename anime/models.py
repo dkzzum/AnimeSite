@@ -1,3 +1,4 @@
+from django.contrib.gis.gdal.prototypes.geom import clone_geom
 from django.db import models
 from django.urls import reverse
 
@@ -10,7 +11,8 @@ class AnimeTitlesManager(models.Manager):
 
     def by_grade(self, descending=True):
         # Фильтрация по рейтингу с сортировкой
-        ordering = 'grade' if descending else '-grade'
+        ordering = '-grade' if descending else 'grade'
+        return self.order_by(ordering)
 
     def by_views(self, descending=True):
         # Фильтрация по числу просмотров с сортировкой
@@ -28,7 +30,7 @@ class AnimeMaterials(models.Model):
     slug = models.SlugField(max_length=255, unique=True, db_index=True)
     en_title = models.CharField(blank=True, max_length=255)
     jp_title = models.CharField(blank=True, max_length=255)
-    # episode = models.IntegerField(blank=True, default=12)
+    episode = models.IntegerField(blank=True, default=12)
     status = models.TextField(choices=Status, default=Status.IS_OUT)
     studio = models.CharField(max_length=255, blank=True)
     description = models.TextField(blank=True)
@@ -50,6 +52,13 @@ class AnimeMaterials(models.Model):
     objects = models.Manager()
 
 
+class Index(models.Model):
+    name = models.CharField(max_length=255)
+    nslug = models.SlugField(max_length=255, blank=True, null=True, unique=False)
+    class_name = models.CharField(max_length=255, blank=True, null=True)
+    anime = models.ManyToManyField(to='AnimeMaterials', null=True, blank=True, related_name='anime')
+
+
 class Views(models.Model):
     view = models.IntegerField(default=0, blank=True)
     unique_views = models.IntegerField(default=0, blank=True)
@@ -67,9 +76,18 @@ class Grade(models.Model):
     sum = models.IntegerField(null=True, blank=True, default=0)
     quantity = models.IntegerField(default=0, blank=True)
 
+    def set_grade(self, new_grade):
+        self.sum += new_grade
+        self.quantity += 1
+        self.save()
+
+    def calculation_grade(self):
+        self.grade = self.sum / self.quantity
+        self.save()
+
     def __str__(self):
         if self.grade != 0 and self.quantity >= 100:
-            return f'{self.grade} / 10'
+            return f'{str(self.grade)[:4]} / 10'
         else:
             return '? / 10'
 
