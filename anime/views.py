@@ -1,19 +1,19 @@
 import random
 from django.shortcuts import render
 from .models import AnimeMaterials, Index
+from django.db.models import Q
 
 
 # Create your views here.
 def index(request):
-    data = {'data': []}
-    for i in Index.objects.all():
-        data['data'].append({
-            'name': i.name,
-            'anime': i.anime.all(),
-            'div_name': i.class_name
-        })
+    data = {'hero': Index.objects.get(nslug='hero')}
 
-    print(data)
+    for item in Index.objects.filter(~Q(name='Главное')):
+        if item.nslug in data.keys():
+            data[item.nslug].append(item)
+        else:
+            data[item.nslug] = [item]
+
     return render(request, 'anime/index.html', context=data)
 
 
