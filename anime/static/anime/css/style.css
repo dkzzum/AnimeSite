@@ -1069,6 +1069,7 @@ form {
 }
 
 .anime__details__btn .follow-btn {
+	margin-top: 20px;
 	font-size: 13px;
 	color: #ffffff;
 	background: #e53637;
@@ -1189,8 +1190,20 @@ form {
   Anime Watching
 -----------------------*/
 
+.col-lg-12 {
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+	background-color: rgba(33,37,41,0.58);
+	padding-top: 55px;
+    margin-bottom: 100px;
+}
+
 .anime__video__player {
 	margin-bottom: 70px;
+	max-width: 1140px;
+    width: 100%;
 }
 
 .anime__video__player .plyr--video {
@@ -1274,6 +1287,7 @@ form {
 
 .anime__details__episodes {
 	margin-bottom: 35px;
+	max-width: 1140px;
 }
 
 .anime__details__episodes a {
