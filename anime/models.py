@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models import F
+from django.db.models import F, Value
 from django.urls import reverse
 
 
@@ -87,7 +87,7 @@ class Views(models.Model):
     unique_views = models.IntegerField(default=0, blank=True)
 
     def add_view(self):
-        self.view = F('view') + 1
+        self.view = F('view') + Value(1)
         self.save(update_fields=['view'])
 
         self.refresh_from_db()

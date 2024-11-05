@@ -5,5 +5,6 @@ from anime import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('anime/<slug:anime_slug>/', views.watch_anime, name='watch_anime')
+    path('anime/<slug:anime_slug>/', views.watch_anime, name='watch_anime'),
+    path('add_comment/<slug:anime_slug>/', views.add_comment, name='add_comment'),
 ]

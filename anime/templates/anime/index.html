@@ -56,7 +56,7 @@
                                         <div class="product__item">
                                             <div class="product__item__pic set-bg" data-setbg="{% static 'anime/img/' %}{{ item.slug }}.jpg">
                                                 <div class="ep"> {{ item.grade }}</div>
-                                                <div class="comment"><i class="fa fa-comments"></i> {{ item.commentaries }}</div>
+                                                <div class="comment"><i class="fa fa-comments"></i> {{ item.anime_commentaries.count }}</div>
                                                 <div class="view"><i class="fa fa-eye"></i> {{ item.view }}</div>
                                             </div>
                                             <div class="product__item__text">
