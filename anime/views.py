@@ -1,12 +1,12 @@
 import random
+from django.http import HttpRequest
 from django.shortcuts import render, get_object_or_404, redirect
-from django.utils import timezone
-from .models import AnimeMaterials, Index, Commentaries
+from .models import AnimeMaterials, Index, Commentaries, Category
 from django.db.models import Q
 
 
 # Create your views here.
-def index(request):
+def index(request: HttpRequest):
     data = {'hero': Index.objects.get(name_slug='hero')}
 
     for item in Index.objects.filter(~Q(name='Главное')).prefetch_related('anime__grade', 'anime__view',
@@ -19,7 +19,7 @@ def index(request):
     return render(request, 'anime/index.html', context=data)
 
 
-def watch_anime(request, anime_slug: str):
+def watch_anime(request: HttpRequest, anime_slug: str):
     might_like = set()
 
     while len(might_like) < 4:
@@ -32,12 +32,23 @@ def watch_anime(request, anime_slug: str):
     data = {
         'anime': anime,
         'might_like': might_like,
-        'commentaries': commentaries
+        'commentaries': commentaries,
     }
     return render(request, 'anime/anime-details.html', context=data)
 
 
-def add_comment(request, anime_slug):
+def page_category(request, category_slug=None, category_int=None):
+    if category_slug is not None:
+        print(category_slug)
+
+    data = {
+        'category': Category.objects.all()
+    }
+
+    return render(request, 'anime/categories.html', context=data)
+
+
+def add_comment(request: HttpRequest, anime_slug: str):
     if request.method == "POST":
         comment_text = request.POST.get("comment")
         anime = get_object_or_404(AnimeMaterials, slug=anime_slug)

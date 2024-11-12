@@ -60,6 +60,9 @@ class AnimeMaterials(models.Model):
 
 
 class Commentaries(models.Model):
+    class Meta:
+        ordering = ['-data_create']
+
     user = models.CharField(max_length=255)
     commentaries = models.TextField(max_length=10000)
     data_create = models.DateTimeField(auto_now_add=True)
@@ -87,11 +90,11 @@ class Views(models.Model):
     unique_views = models.IntegerField(default=0, blank=True)
 
     def add_view(self):
-        self.view = F('view') + Value(1)
+        self.view = F('view') + 1
         self.save(update_fields=['view'])
 
         self.refresh_from_db()
-        return self.view
+        return f'{self.view}'
 
     def __str__(self):
         return str(self.view)

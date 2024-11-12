@@ -7,6 +7,7 @@
     <section class="hero">
         <div class="container">
             <div class="hero__slider owl-carousel">
+
                 {% for item in hero.anime.all %}
                     <div class="hero__items set-bg" data-setbg="{% static "anime/img/hero/fate-stay-night-unlimited-blade-works.jpg" %}">
                         <div class="row">
@@ -23,6 +24,7 @@
                         </div>
                     </div>
                 {% endfor %}
+
             </div>
         </div>
     </section>
@@ -73,6 +75,7 @@
                             </div>
                         </div>
                     {% endfor %}
+
                 </div>
 
                 <div class="col-lg-4 col-md-6 col-sm-8">
@@ -94,7 +97,6 @@
                                 </div>
                             </div>
                         {% endfor %}
-
                     </div>
                 </div>
             </div>
